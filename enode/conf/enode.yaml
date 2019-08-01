@@ -1,3 +1,5 @@
+# 注意缩进只接受空格不接受Tab；冒号后跟一空格
+
 # 日志记录器配置
 loggerConfig:
   # mongoDB地址: 采用mongoDB uri
@@ -25,3 +27,11 @@ ledgerConfig:
 
 # 终端配置
 endConfig:
+
+
+# 终端管理器配置
+endmgrConfig:
+  manager: eiger
+  enodeIpAddress: 127.0.0.1:9797
+
+# 监控器配置

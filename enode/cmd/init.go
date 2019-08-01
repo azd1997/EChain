@@ -38,6 +38,13 @@ func init() {
 	ledgerCmd.AddCommand(printChainCmd)
 	ledgerCmd.AddCommand(startNodeCmd)
 
+	// monitorCmd
+	rootCmd.AddCommand(monitorCmd)
+
+	// endmgrCmd
+	rootCmd.AddCommand(endmgrCmd)
+	endmgrCmd.AddCommand(assignEndIdCmd)
+
 
 }
 

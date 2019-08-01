@@ -37,6 +37,10 @@ func initFlags() {
 	// ledger
 	getBalanceCmd.Flags().StringP("Address", "a", "", "填入账户地址，根据账户地址查询其余额 (参数必需)")
 
+	// endmgr
+	assignEndIdCmd.Flags().StringP("name", "n", "", "终端设备名称")
+	assignEndIdCmd.Flags().StringP("usage", "u", "", "终端设备用途")
+	assignEndIdCmd.Flags().StringP("location", "l", "", "终端设备地点")
 
 
 	log.Println("初始化命令行参数集成功！")
