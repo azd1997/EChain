@@ -3,6 +3,7 @@ package p2p
 import (
 	"EChain/enode/ledger"
 	"EChain/enode/ledger/blockchain"
+	"EChain/enode/utils"
 	"bytes"
 	"encoding/gob"
 	"log"
@@ -32,8 +33,8 @@ func HandleGetBlocks(request []byte, chain *blockchain.Chain) {
 
 // 发送获取区块请求
 func SendGetBlocks(address string) {
-	payload := GobEncode(GetBlocks{ledger.Config().Addr})
-	request := append(CmdToBytes("getblocks"), payload...)
+	payload := utils.GobEncode(GetBlocks{ledger.Config().Addr})
+	request := append(utils.CmdToBytes("getblocks", commandLength), payload...)
 
 	SendData(address, request)
 }

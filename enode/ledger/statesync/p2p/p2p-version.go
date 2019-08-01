@@ -3,6 +3,7 @@ package p2p
 import (
 	"EChain/enode/ledger"
 	"EChain/enode/ledger/blockchain"
+	"EChain/enode/utils"
 	"bytes"
 	"encoding/gob"
 	"log"
@@ -58,9 +59,9 @@ func SendVersion(addr string, chain *blockchain.Chain) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	payload := GobEncode(Version{version, int(bestHeight), ledger.Config().Addr})
+	payload := utils.GobEncode(Version{version, int(bestHeight), ledger.Config().Addr})
 
-	request := append(CmdToBytes("version"), payload...)
+	request := append(utils.CmdToBytes("version", commandLength), payload...)
 
 	SendData(addr, request)
 }

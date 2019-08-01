@@ -2,6 +2,7 @@ package p2p
 
 import (
 	"EChain/enode/ledger"
+	"EChain/enode/utils"
 	"bytes"
 	"encoding/gob"
 	"fmt"
@@ -39,8 +40,8 @@ func HandleAddr(request []byte) {
 func SendAddr(address string) {
 	nodes := Addr{KnownNodes}
 	nodes.AddrList = append(nodes.AddrList, ledger.Config().Addr)
-	payload := GobEncode(nodes)
-	request := append(CmdToBytes("addr"), payload...)
+	payload := utils.GobEncode(nodes)
+	request := append(utils.CmdToBytes("addr", commandLength), payload...)
 
 	SendData(address, request)
 }

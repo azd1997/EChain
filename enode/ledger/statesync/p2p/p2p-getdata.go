@@ -3,6 +3,7 @@ package p2p
 import (
 	"EChain/enode/ledger"
 	"EChain/enode/ledger/blockchain"
+	"EChain/enode/utils"
 	"bytes"
 	"encoding/gob"
 	"encoding/hex"
@@ -55,8 +56,8 @@ func HandleGetData(request []byte, chain *blockchain.Chain) {
 
 /*发送获取数据的请求*/
 func SendGetData(address, kind string, id []byte) {
-	payload := GobEncode(GetData{ledger.Config().Addr, kind, id})
-	request := append(CmdToBytes("getdata"), payload...)
+	payload := utils.GobEncode(GetData{ledger.Config().Addr, kind, id})
+	request := append(utils.CmdToBytes("getdata", commandLength), payload...)
 
 	SendData(address, request)
 }

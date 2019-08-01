@@ -3,6 +3,7 @@ package p2p
 import (
 	"EChain/enode/ledger"
 	"EChain/enode/ledger/blockchain"
+	"EChain/enode/utils"
 	"bytes"
 	"encoding/gob"
 	"fmt"
@@ -62,8 +63,8 @@ func SendBlock(addr string, b *blockchain.Block) {
 		log.Fatal(err)
 	}
 	data := Block{ledger.Config().Addr, bBytes}
-	payload := GobEncode(data)
-	request := append(CmdToBytes("block"), payload...)
+	payload := utils.GobEncode(data)
+	request := append(utils.CmdToBytes("block", commandLength), payload...)
 
 	SendData(addr, request)
 }

@@ -9,3 +9,4 @@ package ledger
 import "errors"
 
 var ErrInvalidAccountAddress = errors.New("账户地址无效！")
+var ErrUnknownCommand = errors.New("未知命令！")

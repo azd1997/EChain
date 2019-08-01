@@ -1,20 +1,22 @@
 /**********************************************************************
 * @Author: Eiger (201820114847@mail.scut.edu.cn)
-* @Date: 2019/7/19 17:13
+* @Date: 2019/8/1 21:20
 * @Description: The file is for
 ***********************************************************************/
 
-package p2p
+package utils
 
-import (
-	"bytes"
-	"encoding/gob"
-	"fmt"
-)
+import "fmt"
+
+/*从request信息中抽取前12字节作为命令*/
+func ExtractCmd(request []byte, commandLength int) []byte {
+	return request[:commandLength]
+}
 
 // 将命令（字符串）转为字节数组
-func CmdToBytes(cmd string) []byte {
-	var cmdBytes [commandLength]byte
+func CmdToBytes(cmd string, commandLength int) []byte {
+
+	var cmdBytes = make([]byte, commandLength)
 
 	for i, c := range cmd {
 		cmdBytes[i] = byte(c)
@@ -34,20 +36,4 @@ func BytesToCmd(cmdBytes []byte) string {
 	}
 
 	return fmt.Sprintf("%s", cmd)
-}
-
-/*将数据进行编码得到字节数组*/
-func GobEncode(data interface{}) []byte {
-	var buff bytes.Buffer
-
-	enc := gob.NewEncoder(&buff)
-	err := enc.Encode(data)
-	utils.Handle(err)
-
-	return buff.Bytes()
-}
-
-/*从request信息中抽取前12字节作为命令*/
-func ExtractCmd(request []byte) []byte {
-	return request[:commandLength]
 }

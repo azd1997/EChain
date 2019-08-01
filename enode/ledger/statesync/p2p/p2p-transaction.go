@@ -3,6 +3,7 @@ package p2p
 import (
 	"EChain/enode/ledger"
 	"EChain/enode/ledger/blockchain"
+	"EChain/enode/utils"
 	"bytes"
 	"encoding/gob"
 	"encoding/hex"
@@ -73,7 +74,7 @@ func MineTx(chain *blockchain.Chain) {
 	}
 
 	//挖矿者在出块时自行创建Coinbase交易，数据域可以自行指定，若为空则随机字符串
-	cbTx := blockchain.CoinbaseTx(ledger.Config().MinerAddress, "")
+	cbTx, _ := blockchain.CoinbaseTx()
 	txs = append(txs, cbTx)
 
 	//新区块
@@ -111,8 +112,8 @@ func MineTx(chain *blockchain.Chain) {
 func SendTx(addr string, tx *blockchain.Tx) {
 	txBytes, _ := tx.Serialize()
 	data := Tx{ledger.Config().Addr, txBytes}
-	payload := GobEncode(data)
-	request := append(CmdToBytes("tx"), payload...)
+	payload := utils.GobEncode(data)
+	request := append(utils.CmdToBytes("tx", commandLength), payload...)
 
 	SendData(addr, request)
 }

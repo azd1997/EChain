@@ -3,6 +3,7 @@ package p2p
 import (
 	"EChain/enode/ledger"
 	"EChain/enode/ledger/blockchain"
+	"EChain/enode/utils"
 	"bytes"
 	"encoding/gob"
 	"encoding/hex"
@@ -19,8 +20,8 @@ type Inv struct {
 /*向某节点发送存证*/
 func SendInv(address, kind string, items [][]byte) {
 	inventory := Inv{ledger.Config().Addr, kind, items}
-	payload := GobEncode(inventory)
-	request := append(CmdToBytes("inv"), payload...)
+	payload := utils.GobEncode(inventory)
+	request := append(utils.CmdToBytes("inv", commandLength), payload...)
 
 	SendData(address, request)
 }

@@ -9,6 +9,7 @@ package p2p
 import (
 	"EChain/enode/ledger"
 	"EChain/enode/ledger/blockchain"
+	"EChain/enode/utils"
 	"fmt"
 	DEATH "github.com/vrecan/death"
 	"io/ioutil"
@@ -55,7 +56,7 @@ func HandleConnection(conn net.Conn, chain *blockchain.Chain) {
 	defer conn.Close()
 
 	//从request获取command
-	command := BytesToCmd(req[:commandLength])
+	command := utils.BytesToCmd(req[:commandLength])
 	fmt.Printf("Received %s command\n", command)
 
 	//对命令作出对应处理
@@ -76,7 +77,7 @@ func HandleConnection(conn net.Conn, chain *blockchain.Chain) {
 		HandleVersion(req, chain)
 
 	default:
-		fmt.Println("Unknown command")
+		fmt.Println(ledger.ErrUnknownCommand)
 	}
 }
 
