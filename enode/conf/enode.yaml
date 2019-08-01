@@ -35,3 +35,8 @@ endmgrConfig:
   enodeIpAddress: 127.0.0.1:9797
 
 # 监控器配置
+monitorConfig:
+  serverIpAddress: 127.0.0.1:9798
+  serverReadTimeout: 5000
+  serverWriteTimeout: 5000
+  serverWebRoot: webroot

@@ -6,3 +6,17 @@
 
 package endmgr
 
+import "github.com/spf13/viper"
+
+type Conf struct {
+
+	manager string
+	enodeIpAddress string
+}
+
+func Config() *Conf {
+	return &Conf{
+		manager:                 viper.GetString("endmgrConfig.manager"),
+		enodeIpAddress:           viper.GetString("endmgrConfig.enodeIpAddress"),
+	}
+}

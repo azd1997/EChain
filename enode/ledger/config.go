@@ -8,6 +8,7 @@ package ledger
 
 import (
 	"EChain/enode/conf"
+	"github.com/spf13/viper"
 	"log"
 )
 
@@ -27,15 +28,32 @@ type Conf struct {
 
 func Config() *Conf {
 	return &Conf{
-		Addr:                 conf.E_config.Ledger.Addr,
-		GenesisMsg:           conf.E_config.Ledger.BC.GenesisMsg,
-		DbEngine:             conf.E_config.Ledger.BC.DbEngine,
-		DbPathTemp:           conf.E_config.Ledger.BC.DbPathTemp,
-		AccountsFilePathTemp: conf.E_config.Ledger.Account.FilePathTemp,
-		MinerAddress:         conf.E_config.Ledger.Account.MinerAddress,
-		SyncStateMethod:      conf.E_config.Ledger.SyncState.Method,
+		Addr:                 viper.GetString("ledgerConfig.nodeAddr"),
+		GenesisMsg:           viper.GetString("ledgerConfig.blockChain.genesisMsg"),
+		DbEngine:             viper.GetString("ledgerConfig.blockChain.dbEngine"),
+		DbPathTemp:           viper.GetString("ledgerConfig.blockChain.dbPathTemp"),
+		AccountsFilePathTemp: viper.GetString("ledgerConfig.account.filePathTemp"),
+		MinerAddress:         viper.GetString("ledgerConfig.account.minerAddress"),
+		SyncStateMethod:      viper.GetString("ledgerConfig.syncState.method"),
 	}
 }
+
+
+
+//func Config() *Conf {
+//	return &Conf{
+//		Addr:                 conf.E_config.Ledger.Addr,
+//		GenesisMsg:           conf.E_config.Ledger.BC.GenesisMsg,
+//		DbEngine:             conf.E_config.Ledger.BC.DbEngine,
+//		DbPathTemp:           conf.E_config.Ledger.BC.DbPathTemp,
+//		AccountsFilePathTemp: conf.E_config.Ledger.Account.FilePathTemp,
+//		MinerAddress:         conf.E_config.Ledger.Account.MinerAddress,
+//		SyncStateMethod:      conf.E_config.Ledger.SyncState.Method,
+//	}
+//}
+
+
+
 
 func ConfigTest() *Conf {
 	return &Conf{
